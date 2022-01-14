@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>BLL_BusinessLogicLayer_</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BOL(BusinessObjectLayer)\BOL(BusinessObjectLayer).csproj" />
+    <ProjectReference Include="..\DAL(DataAccessLayer)\DAL(DataAccessLayer).csproj" />
+  </ItemGroup>
+
+</Project>
