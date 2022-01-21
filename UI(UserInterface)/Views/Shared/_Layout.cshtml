@@ -20,14 +20,42 @@
                     @* Navigate *@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" asp-action="Index" asp-controller="Home">Home</a>
+                    </li>
 
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Categorys" asp-action="Index">Categorys</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Product" asp-action="Index">Products</a>
-                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.IsInRole("Manager"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Categorys" asp-action="Index">Categorys</a>
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Product" asp-action="Index">Products</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Users" asp-action="Profile">Welcome, @User.Identity.Name</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Security" asp-action="Logout">Logout</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Security" asp-action="Register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Security" asp-action="Login">Login</a>
+                        </li>
+                    }
+
+
+
+
                 </ul>
             </div>
         </div>

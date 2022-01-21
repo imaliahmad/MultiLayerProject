@@ -1,8 +1,12 @@
 using BLL_BusinessLogicLayer_;
+using BOL_BusinessObjectLayer_;
 using DAL_DataAccessLayer_;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,6 +35,15 @@ namespace UI_UserInterface_
             #endregion
 
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(@"Server=DESKTOP-8E0GKPI\SQLEXPRESS;Database=MultiTierArchitecture;Trusted_Connection=True;"));
+            
+            services.AddIdentity<AppUsers, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            services.AddControllersWithViews(x => x.Filters.Add(new AuthorizeFilter(policy)));
+
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Security/Login");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +56,9 @@ namespace UI_UserInterface_
 
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

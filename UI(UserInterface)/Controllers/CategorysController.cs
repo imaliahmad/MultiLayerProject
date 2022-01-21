@@ -1,5 +1,6 @@
 ﻿using BLL_BusinessLogicLayer_;
 using BOL_BusinessObjectLayer_;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace UI_UserInterface_.Controllers
 {
+    [Authorize(Roles ="Manager")]
     public class CategorysController : Controller
     {
         private readonly ICategoryBs objCategoryBs;

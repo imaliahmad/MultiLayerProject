@@ -5,4 +5,9 @@
     <RootNamespace>BOL_BusinessObjectLayer_</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.12" />
+  </ItemGroup>
+
 </Project>
